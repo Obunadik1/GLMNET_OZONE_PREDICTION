@@ -8,6 +8,9 @@ head(ozone,5)
 tail(ozone,5)
 str(ozone)
 
+#From the above result, the dimension shows 973 data points (Rows) and 14 variables (Columns). 
+#While the first 5 and last  5 rows of the data set are shown above.
+
 ###Q2 DATA PREPARATION###
 ###Q2a CHECKING FOR MISSING VARIABLES###
 data = ozone
@@ -30,6 +33,8 @@ out <- as.data.frame(out)
 row.names(out) <- NULL
 out
 
+#The results from the analysis shows that there is no missing values in the data set. 
+#All the variable types are continuous with the exception of target variable which is binary (Categorical).
 
 for (j in 1:NCOL(data)){
   print(colnames(data)[j])
@@ -39,6 +44,9 @@ for (j in 1:NCOL(data)){
 boxplot(ozone$OxidesofNitrogen,ozone$NitrogenDioxide,ozone$SolarRadiation,
         ozone$Std.Dev.WindDirection,names = c("OxideNitrogen","NitrogenDiOx","SolarRadiation","Std_Dev_Wind_Dir")
         ,col=c("blue","red","green","yellow"),main="Distribution of some selected variables")
+
+#From the distribution of the selected features, most of the features contain outliers with the exception of "Std.Dev.WindDirection"and "SolarRadiation".
+#See boxplot above for more detail.
 
 ##Q2b Exploratory Data Analysis############
 ozoneRate<- ifelse(ozone$Ozone==1, "High ozone", "low ozone")
@@ -175,4 +183,10 @@ pred1 <- ifelse(pred>0.5, 1, 0)
 confusionMatrix(factor(pred1), factor(D3.y))
 
 # CONCLUSION
+#The Sensitivity or Recall (TP rate) of 0.9051 (90.5%) indicates that the model has a higher % of detecting Low Ozone rate of a particular day. 
+#The Specificity(TN rate) of 0.9307 (93.07%) indicates that the model has a higher % of detecting high  Ozone rate of a particular day. 
+#Therefore, our fitted Model has an accuracy of 91.6% with respect to performance and a precision of 94.7% which implies that our Model has a low
+#FP rate.
+#In conclusion we noticed that our fitted model has an accuracy of 91.6% with a low MSE value of 0.06484241 
+#and Misclassification rate of 0.084403361 after our logistic model was penalized using lasso regularization.*/
 
